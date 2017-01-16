@@ -23,8 +23,17 @@ module Facebook
 
         def type
           payload = {
-            recipient: sender,
-            sender_action: 'typing_on'
+              recipient: sender,
+              sender_action: 'typing_on'
+          }
+
+          Facebook::Messenger::Bot.deliver(payload, access_token: access_token)
+        end
+
+        def seen
+          payload = {
+              recipient: sender,
+              sender_action: 'mark_seen'
           }
 
           Facebook::Messenger::Bot.deliver(payload, access_token: access_token)
